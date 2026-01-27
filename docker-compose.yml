@@ -1,0 +1,39 @@
+services:
+  nginx:
+    image: nginx:1.25
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/public:ro
+      - ./upload/image:/var/www/upload/image
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./docker/php
+      target: php
+    volumes:
+      - ./public:/var/www/public
+      - ./upload/image:/var/www/upload/image
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: example_db
+      MYSQL_ALLOW_EMPTY_PASSWORD: "1"
+      TZ: Asia/Tokyo
+    command: >
+      mysqld
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max_allowed_packet=4MB
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
+  image:
