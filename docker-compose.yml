@@ -2,7 +2,7 @@ services:
   nginx:
     image: nginx:1.25
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - ./public:/var/www/public:ro
       - ./upload/image:/var/www/upload/image
