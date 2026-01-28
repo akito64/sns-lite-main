@@ -1,5 +1,8 @@
-タイムライン　期末課題
+タイムライン(PHP、NGinx、sql、Docker)
 
+某 X みたいな感じのやつを作成
+
+１．まずDockerおよびdocker composeのインストール方法
 sudo dnf update -y,
 
 sudo dnf install -y git
@@ -65,4 +68,4 @@ docker compose exec nginx nginx -s reload
 
 
 
-アクセス:　http://3.237.88.149/login.php
+アクセス:　http://3.236.40.98/login.php
