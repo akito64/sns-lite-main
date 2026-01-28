@@ -35,4 +35,34 @@ docker compose up -d --build
 
 docker compose exec -T mysql mysql -uroot example_db < db/schema.sql
 
+DBの作成
+docker compose exec mysql mysql -uroot -e 'CREATE DATABASE IF NOT EXISTS example_db;
+
+スキーマを入れる
+docker compose exec -T mysql sh -lc 'mysql -uroot example_db' < db/schema.sql
+
+DBがあるかの確認
+docker compose exec mysql mysql -uroot -e 'SHOW DATABASES LIKE "example_db";'
+
+テーブルが入っているかの確認
+docker compose exec -it mysql mysql -uroot example_db -e 'SHOW TABLES;'
+
+代表テーブルにデータが入ってるかの確認
+docker compose exec mysql mysql -uroot example_db -e 'SELECT COUNT(*) FROM users;'
+
+画像保存ディレクトリを作ってそれに権限を付与
+docker compose exec php sh -lc '
+  mkdir -p /var/www/upload/image &&
+  chown -R www-data:www-data /var/www/upload &&
+  chmod -R 775 /var/www/upload &&
+  ls -ld /var/www/upload /var/www/upload/image
+'
+怖いしNginxから直配信の確認
+docker compose exec nginx sh -lc 'nginx -T | sed -n "/location \\^~ \\/image\\//,+8p"'
+
+念のためリロード
+docker compose exec nginx nginx -s reload
+
+
+
 アクセス:　http://3.237.88.149/login.php
