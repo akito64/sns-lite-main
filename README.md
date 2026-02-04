@@ -2,7 +2,7 @@
 
 ### 某 X みたいな感じのやつを作成
 
-## １．まずDockerおよびdocker composeのインストール方法
+## １．Dockerおよびdocker composeのインストール方法
 
 ```
 sudo dnf update -y,
@@ -16,26 +16,26 @@ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 sudo usermod -aG docker ec2-user  
 ```
 
-### 再ログイン後に確認:
+### ２．再ログイン後に確認:
 ```  
 docker --version  
 docker compose version  
 ```
-### gitからソースコードを取得  
+### ３．gitからソースコードを取得  
 ```
 git clone https://github.com/akito64/sns-lite-main.git   
 cd sns-lite-main  
 ```
 
-###  ビルド  起動
+###  ４．ビルド  起動
 ```
 docker compose up -d --build  
 ```
-### データベースの初期化  
+### ５．データベースの初期化  
 ```  
 docker compose exec -T mysql mysql -uroot example_db < db/schema.sql  
 ```  
-## DBの作成及びテーブルの作成及び確認
+## ６．DBの作成及びテーブルの作成及び確認
 ```
 docker compose exec mysql mysql -uroot -e 'CREATE DATABASE IF NOT EXISTS example_db;  
 docker compose exec -T mysql sh -lc 'mysql -uroot example_db' < db/schema.sql  
@@ -44,7 +44,7 @@ docker compose exec -it mysql mysql -uroot example_db -e 'SHOW TABLES;'
 docker compose exec mysql mysql -uroot example_db -e 'SELECT COUNT(*) FROM users;'  
 ```
 
-### 画像フォルダーの権限
+### ７．画像フォルダーの権限
 ```
 docker compose exec php sh -lc '
   mkdir -p /var/www/upload/image &&
@@ -53,11 +53,11 @@ docker compose exec php sh -lc '
   ls -ld /var/www/upload /var/www/upload/image
 '  
 ```
-### 怖いしNginxから直配信の確認
+### ８．怖いしNginxから直配信の確認
 ```
 docker compose exec nginx sh -lc 'nginx -T | sed -n "/location \\^~ \\/image\\//,+8p"'  
 ```
-### 念のためリロード   
+### ９．念のためリロード   
 ```
 docker compose exec nginx nginx -s reload  
 ```
