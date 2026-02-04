@@ -63,4 +63,5 @@ docker compose exec nginx nginx -s reload
 ```
 
 
-## アクセス:　http://3.236.40.98/login.php
+最後に動作確認をしてみましょう　
+http://3.236.40.98/login.php
