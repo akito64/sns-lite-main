@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS bbs_entry_images (
 );
 
 
+
 --  フォロ系--
 CREATE TABLE IF NOT EXISTS user_relationships (
   follower_user_id BIGINT NOT NULL,
