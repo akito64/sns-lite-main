@@ -6,4 +6,3 @@ RUN docker-php-ext-install pdo_mysql
 
 # 実行ユーザーなどはデフォルトのままでOK
 WORKDIR /var/www
-
