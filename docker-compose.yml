@@ -32,10 +32,5 @@ services:
       --collation-server=utf8mb4_unicode_ci
       --max_allowed_packet=4MB
     volumes:
-      - mysql:/var/lib/mysql
-
-volumes:
-  mysql:
-  image:
 
 
