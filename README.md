@@ -62,5 +62,3 @@ docker compose exec nginx sh -lc 'nginx -T | sed -n "/location \\^~ \\/image\\//
 docker compose exec nginx nginx -s reload  
 ```
 
-### １０．動作確認
-http://3.236.40.98/login.php
