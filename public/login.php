@@ -2,6 +2,7 @@
 require __DIR__.'/_common.php';
 session_start_once();
 
+
 // 既にログイン済みならタイムラインへ
 if (current_user()) { header('Location:/timeline.php'); exit; }
 ?>
