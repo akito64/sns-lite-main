@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     if ($fn) $icon = $fn;
   }
 
+  
   $st = $dbh->prepare('UPDATE users SET name=:n, icon_filename=:i WHERE id=:id');
   $st->execute([':n'=>$name, ':i'=>$icon, ':id'=>$me['id']]);
 
